@@ -17,7 +17,7 @@
               Posty
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Lisat postów</a></li>
+              <li><a class="dropdown-item" href="#">Lista postów</a></li>
               <li><a class="dropdown-item" href="#">Dodaj post</a></li>
             </ul>
           </li>

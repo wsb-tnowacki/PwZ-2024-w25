@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StartController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,27 +14,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
-//Route::get('/', [StartController::class, 'lista'])->name('start');
-
-/* Route::get('/kontakt', function () {
-    return view('kontakt');
-}); */
-//Route::get('/kontakt', [StartController::class, 'kontakt'])->name('kontakt');
-/* Route::get('/onas', function () {
-    $zadania =[
-        'Zadanie 1',
-        'Zadanie 2',
-        'Zadanie 3'
-    ];
-    return view('onas',['zadania'=> $zadania]);
-}); */
-//Route::get('/onas', [StartController::class, 'onas'])->name('onas');
 Route::controller(StartController::class)->group(function () {
     Route::get('/', 'lista')->name('start');
     Route::get('/kontakt', 'kontakt')->name('kontakt');
     Route::get('/onas', 'onas')->name('onas');
 });
+
+
+Route::get('/dashboard', function () {
+    //return view('dashboard');
+    return redirect()->route('start');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
