@@ -9,4 +9,8 @@ class Post extends Model
 {
     use HasFactory;
     protected $table = 'posty';
+
+    protected $primaryKey ='id';
+
+    protected $guarded = [];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //$posty = Post::all();
+        $posty = Post::paginate(10);
+        return view('post.lista', compact('posty'));
     }
 
     /**
@@ -20,15 +23,21 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.dodaj');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        //
+           $posty = new Post();
+           $posty->tytul = request('tytul');
+           $posty->autor = request('autor');
+           $posty->email = request('email');
+           $posty->tresc = request('tresc');
+           $posty->save();
+           return redirect()->route('posty.index')->with('message', "Pomyślnie dodano post") ;
     }
 
     /**
@@ -36,7 +45,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        //$post = Post::findOrFail($id);
+        return view('post.post', compact('post'));
     }
 
     /**
@@ -44,22 +54,31 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+       // $post = Post::findOrFail($id);
+        return view('post.edytuj', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostStoreRequest $request,  $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->tytul = request('tytul');
+        $post->autor = request('autor');
+        $post->email = request('email');
+        $post->tresc = request('tresc');
+        $post->update();
+        return redirect()->route('posty.index')->with('message', "Pomyślnie zmieniono post") ;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('posty.index')->with('message', "Pomyślnie usunięto post")->with('class', 'danger') ;
     }
 }
