@@ -32,12 +32,12 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {
            $posty = new Post();
-           $posty->tytul = request('tytul');
+/*            $posty->tytul = request('tytul');
            $posty->autor = request('autor');
            $posty->email = request('email');
-           $posty->tresc = request('tresc');
+           $posty->tresc = request('tresc'); */
            $posty->save();
-           return redirect()->route('posty.index')->with('message', "Pomyślnie dodano post") ;
+           return redirect()->route('post.index')->with('message', "Pomyślnie dodano post") ;
     }
 
     /**
@@ -61,24 +61,25 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostStoreRequest $request,  $id)
+    public function update(PostStoreRequest $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-        $post->tytul = request('tytul');
+        //$post = Post::findOrFail($post->id);
+/*         $post->tytul = request('tytul');
         $post->autor = request('autor');
         $post->email = request('email');
-        $post->tresc = request('tresc');
-        $post->update();
-        return redirect()->route('posty.index')->with('message', "Pomyślnie zmieniono post") ;
+        $post->tresc = request('tresc'); */
+        //$post = $request;
+        $post->update($request->validated());
+        return redirect()->route('post.index')->with('message', "Pomyślnie zmieniono post") ;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+       //$post = Post::findOrFail($post->id);
         $post->delete();
-        return redirect()->route('posty.index')->with('message', "Pomyślnie usunięto post")->with('class', 'danger') ;
+        return redirect()->route('post.index')->with('message', "Pomyślnie usunięto post")->with('class', 'danger') ;
     }
 }

@@ -7,7 +7,7 @@
     Uzupełnij brakujące pola
 </div>
 @endif
-<form action="{{ route('posty.update', $post->id) }}" method="post">
+<form action="{{ route('post.update', $post->id) }}" method="post">
     @method('PUT')
     @csrf
         <div class="form-group">

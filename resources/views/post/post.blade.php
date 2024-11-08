@@ -52,8 +52,8 @@
             @endif
         </div>
         <br>
-<a href="{{route('posty.index')}}"><button class="btn btn-primary form-btn m-1" type="button">Powrót do listy</button></a> 
-<a href="{{route('posty.edit', $post->id)}}"><button class="btn btn-success form-btn m-1" type="button">Edytuj</button></a> 
+<a href="{{route('post.index')}}"><button class="btn btn-primary form-btn m-1" type="button">Powrót do listy</button></a> 
+<a href="{{route('post.edit', $post->id)}}"><button class="btn btn-success form-btn m-1" type="button">Edytuj</button></a> 
         
 
 @endsection

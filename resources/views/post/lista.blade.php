@@ -21,11 +21,12 @@
       @foreach ($posty as $post)
       <tr>
         <th scope="row">{{ $lp++ }}</th>
-        <td><a href="{{route('posty.show',$post->id)}}">{{$post['tytul']}}</a></td>
+        <td><a href="{{route('post.show',$post->id)}}">{{$post['tytul']}}</a></td>
         <td>{{$post->name}}</td>
         <td>{{date('j F Y H:i:s',strtotime($post->created_at))}}</td>
         @auth
-        <td class="d-flex"><a href="{{route('posty.edit', $post->id)}}"><button class="btn btn-success form-btn m-1" type="button">E</button></a> <form action="{{route('posty.destroy',$post->id)}}" method="post">@csrf @method('DELETE')<button class="btn btn-danger form-btn m-1" type="submit">X</button></form></td>
+        <td class="d-flex"><a href="{{route('post.edit', $post->id)}}"><button class="btn btn-success form-btn m-1" type="button">E</button></a> <form action="{{ route('post.destroy', $post->id) }}" method="POST"  onsubmit="return confirmDelete()">@csrf @method('DELETE') <button type="submit" class="btn btn-danger form-btn m-1">X</button></form></td>
+
         @endauth
       </tr>
       @endforeach
@@ -36,5 +37,10 @@
       @endif
     </tbody>
   </table>
+  <script>
+    function confirmDelete() {
+        return confirm("Czy na pewno chcesz usunąć ten post?");
+    }
+</script>
   {{ $posty->links() }}
 @endsection

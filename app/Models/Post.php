@@ -12,5 +12,10 @@ class Post extends Model
 
     protected $primaryKey ='id';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'tytul',
+        'autor',
+        'email',
+        'tresc'
+    ];
 }

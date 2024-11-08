@@ -38,6 +38,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        Route::model('posty', Post::class);
+        //Route::model('post', Post::class);
     }
 }

@@ -7,7 +7,7 @@
     Uzupełnij brakujące pola
 </div>
 @endif
-<form action="{{ route('posty.store') }}" method="post">
+<form action="{{ route('post.store') }}" method="post">
     @csrf
         <div class="form-group">
             <label for="tytul">Tytuł</label>
