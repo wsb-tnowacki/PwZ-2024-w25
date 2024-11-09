@@ -22,7 +22,7 @@ class PostStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tytul' => 'required|min:3|max:200',
+            'tytul' => ['required','min:3','max:200'],
             'autor' => 'required|min:2|max:100',
             'email' => 'required|max:200|email:rfc,dns',
             'tresc' => 'required|min:6'

@@ -36,7 +36,7 @@ class PostController extends Controller
            $posty->autor = request('autor');
            $posty->email = request('email');
            $posty->tresc = request('tresc'); */
-           $posty->save();
+           $posty->create($request->validated());
            return redirect()->route('post.index')->with('message', "Pomyślnie dodano post") ;
     }
 

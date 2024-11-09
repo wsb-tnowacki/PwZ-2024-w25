@@ -11,7 +11,7 @@ class Post extends Model
     protected $table = 'posty';
 
     protected $primaryKey ='id';
-
+    // Tylko poniższe pola mogą być przypisane masowo - przy pomocy metody create() lub update()
     protected $fillable = [
         'tytul',
         'autor',
